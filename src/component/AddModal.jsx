@@ -1,4 +1,4 @@
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 
 export function AddModal(props) {
     const showHideClassName = props.showModal ? "modal display-block" : "modal display-none";
@@ -10,25 +10,19 @@ export function AddModal(props) {
         date: null,
         value: "",
     })
-
-     useEffect(() => {
-         var idRandom = Math.floor(Math.random() * 101)
-         setModal({ ...modalData, id: idRandom })
-
-       console.log("denee")
-     },[props.showModal] )
+    useEffect(() => {
+        var idRandom = Math.floor(Math.random() * 101)
+        setModal({ ...modalData, id: idRandom })
+    }, [props.showModal])
     function saveAdd() {
-        // var idRandom = Math.floor(Math.random() * 101)
-        //  setModal({ ...modalData, id: idRandom })
-        // console.log(idRandom)
         if (modalData.value !== "" && modalData.date !== null) {
-            var copyData = JSON.parse(JSON.stringify(props.todoList)) ? JSON.parse(JSON.stringify(props.todoList)) :[]
+            var copyData = JSON.parse(JSON.stringify(props.todoList)) ? JSON.parse(JSON.stringify(props.todoList)) : []
             if (props.returnData) {
                 copyData.push(modalData);
                 props.returnData(copyData);
                 handleClose();
             }
-        }else{
+        } else {
             alert("Please make sure all fields are filled.")
         }
 
