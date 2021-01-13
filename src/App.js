@@ -6,12 +6,6 @@ import { useState, useEffect } from 'react';
 
 function App() {
 
-  let array_data = [
-    { id: 1, date: '2021-1-10', value: 'test data 1' },
-    { id: 2, date: '2021-1-10', value: 'test data 2' },
-    { id: 3, date: '2021-1-11', value: 'test data 3' }
-  ];
-
   const [showModal, setShowModal] = useState(false);
   const [todoList, setTodoList] = useState(JSON.parse(GetLocalStorage('todoList')));
   useEffect(() => {
