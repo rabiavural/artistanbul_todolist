@@ -2,30 +2,26 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { GroupingByDateData } from '../common/function';
 
-export function TodoList(props) {
 
-    // let todoList = props.todoList ? JSON.parse(JSON.stringify(props.todoList)) : [];
-    // todoList.forEach(val => val.state = 'read');
-    // let groupingData = GroupingByDateData(todoList, props.columnDateKey);
-    // console.log(todoList.length)
-    // console.log(ReturnNewData(todoData).length)
-    // if (Array.isArray(todoList) && Array.isArray(ReturnNewData(todoData)) && todoList.length !== ReturnNewData(todoData).length) {
-    //     setTodoData(groupingData)
-    // }
+var lengthControl = 0;
+export function TodoList(props) {
+    const [todoData, setTodoData] = useState({});
 
     useEffect(() => {
-        let todoList = props.todoList ? JSON.parse(JSON.stringify(props.todoList)) : [];
-        todoList.forEach(val => val.state = 'read');
-        let groupingData = GroupingByDateData(todoList, props.columnDateKey);
-        setTodoData(groupingData)
-    }, [])
+        if(props.todoList){
+             if (props.todoList.length !== lengthControl) {
+            lengthControl = props.todoList.length;
+            let todoList = props.todoList ? JSON.parse(JSON.stringify(props.todoList)) : [];
+            todoList.forEach(val => val.state = 'read');
+            let groupingData = GroupingByDateData(todoList, props.columnDateKey);
+            setTodoData(groupingData)
+        }
+        }
+       
+    })
 
-
-    const [todoData, setTodoData] = useState({});
-    const [test, setTest] = useState(props.deneme);
     function EditableTodo(key, row, column, value) {
-        console.log(row)
-        console.log(value)
+       
         let copyData = JSON.parse(JSON.stringify(todoData));
         copyData[key].forEach(val => {
             if (val.id === row.id) {

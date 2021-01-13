@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useState ,useEffect} from "react";
 
 export function AddModal(props) {
     const showHideClassName = props.showModal ? "modal display-block" : "modal display-none";
@@ -12,9 +11,16 @@ export function AddModal(props) {
         value: "",
     })
 
+     useEffect(() => {
+         var idRandom = Math.floor(Math.random() * 101)
+         setModal({ ...modalData, id: idRandom })
+
+       console.log("denee")
+     },[props.showModal] )
     function saveAdd() {
-        var idRandom = Math.floor(Math.random() * 101)
-        setModal({ ...modalData, id: idRandom })
+        // var idRandom = Math.floor(Math.random() * 101)
+        //  setModal({ ...modalData, id: idRandom })
+        // console.log(idRandom)
         if (modalData.value !== "" && modalData.date !== null) {
             var copyData = JSON.parse(JSON.stringify(props.todoList)) ? JSON.parse(JSON.stringify(props.todoList)) :[]
             if (props.returnData) {
@@ -34,7 +40,9 @@ export function AddModal(props) {
                 <input
                     type="text"
                     value={modalData.value}
-                    onChange={e => setModal({ ...modalData, value: e.target.value })}
+                    onChange={e => {
+                        setModal({ ...modalData, value: e.target.value });
+                    }}
                     className="input-modal-text"
                 />
                 <p className="modal-text-date">Date</p>
