@@ -11,7 +11,6 @@ function App() {
   useEffect(() => {
     SetLocalStorage('todoList', JSON.stringify(todoList))
   })
-  //SetLocalStorage('todoList', JSON.stringify(array_data));
 
   function ToggleModal() {
     setShowModal(!showModal)
