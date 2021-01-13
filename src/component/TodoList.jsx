@@ -3,19 +3,29 @@ import { useEffect, useState } from 'react';
 import { GroupingByDateData } from '../common/function';
 
 export function TodoList(props) {
-  
+
+    // let todoList = props.todoList ? JSON.parse(JSON.stringify(props.todoList)) : [];
+    // todoList.forEach(val => val.state = 'read');
+    // let groupingData = GroupingByDateData(todoList, props.columnDateKey);
+    // console.log(todoList.length)
+    // console.log(ReturnNewData(todoData).length)
+    // if (Array.isArray(todoList) && Array.isArray(ReturnNewData(todoData)) && todoList.length !== ReturnNewData(todoData).length) {
+    //     setTodoData(groupingData)
+    // }
+
     useEffect(() => {
         let todoList = props.todoList ? JSON.parse(JSON.stringify(props.todoList)) : [];
         todoList.forEach(val => val.state = 'read');
         let groupingData = GroupingByDateData(todoList, props.columnDateKey);
-        if(JSON.stringify(groupingData)!== JSON.stringify(todoData)){
-            setTodoData(groupingData)
-        }
-        
-    })
-    const [todoData, setTodoData] = useState({});
+        setTodoData(groupingData)
+    }, [])
 
+
+    const [todoData, setTodoData] = useState({});
+    const [test, setTest] = useState(props.deneme);
     function EditableTodo(key, row, column, value) {
+        console.log(row)
+        console.log(value)
         let copyData = JSON.parse(JSON.stringify(todoData));
         copyData[key].forEach(val => {
             if (val.id === row.id) {
@@ -47,7 +57,9 @@ export function TodoList(props) {
                 })
             );
             props.onNewDataSource(returnData);
+            return returnData;
         }
+
     }
 
     return (

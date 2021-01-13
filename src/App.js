@@ -14,7 +14,6 @@ function App() {
 
   const [showModal, setShowModal] = useState(false);
   const [todoList, setTodoList] = useState(JSON.parse(GetLocalStorage('todoList')));
-
   useEffect(() => {
     SetLocalStorage('todoList', JSON.stringify(todoList))
   })
@@ -27,11 +26,10 @@ function App() {
   return (
     <div className="main-page">
       <p className="header-text">To do</p>
-      {console.log(todoList)}
       <button className="button-add-task" onClick={() => ToggleModal()}>Add New Task</button>
       <TodoList
         todoList={todoList}
-        onNewDataSource={data =>setTodoList(data) }
+        onNewDataSource={data =>setTodoList(data)}
         columnDateKey={'date'}
         columnValueKey={'value'}
       />
@@ -39,7 +37,7 @@ function App() {
         showModal={showModal}
         setShowModal={setShowModal}
         todoList={todoList}
-        returnData={data =>{setTodoList(JSON.parse(JSON.stringify(data)));console.log(data)}}
+        returnData={data =>{setTodoList(JSON.parse(JSON.stringify(data)));}}
       />
     </div>
   );
